@@ -33,6 +33,5 @@ app.get("/publisher", (req, res) => {
     });
 });
 
-app.listen(8800, () => {
-    console.log("Connection to backend established!");
-});
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => console.log(`Connection to backend established on port ${PORT}`));

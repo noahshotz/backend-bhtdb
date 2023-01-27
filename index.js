@@ -60,5 +60,5 @@ app.get("/q5", (req, res) => {
     })
 })
 
-const PORT = process.env.PORT
-app.listen(PORT, () => console.log(`Connection to backend established on port ${PORT}`));
+const RWPORT = process.env.PORT || 4000
+app.listen(RWPORT, () => console.log(`Connection to backend established on port ${RWPORT}`));

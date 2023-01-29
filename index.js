@@ -2,6 +2,7 @@ import express from "express";
 import mysql from "mysql2";
 
 const app = express();
+const port = process.env.PORT || 3000;
 
 const db = mysql.createConnection({
     host: "bhtdb.chxlf7lsw2kg.eu-central-1.rds.amazonaws.com",
@@ -45,7 +46,7 @@ app.get("/videogames", (req,res) =>  {
 })
 
 app.get("/q1", (req, res) => {
-    const q1 = "SELECT videogames.gId, videogames.title as game, COUNT(*) AS count from videogames, QUERYDATA WHERE QUERYDATA.QUERY LIKE CONCAT('% ', videogames.title, '%') GROUP BY videogames.title ORDER BY count DESC"
+    const q1 = "SELECT videogames.gId, videogames.title as game, COUNT(*) AS count from videogames, QUERYDATA WHERE QUERYDATA.QUERY LIKE CONCAT('% ', videogames.title, '%') GROUP BY videogames.title ORDER BY count DESC LIMIT 10"
     db.query(q1, (err, data) => {
         if (err) return res.json(err)
         return res.json(data)
@@ -60,5 +61,4 @@ app.get("/q5", (req, res) => {
     })
 })
 
-const RWPORT = process.env.PORT
-app.listen(RWPORT, () => console.log(`Connection to backend established on port ${RWPORT}`));
+app.listen(port, () => console.log(`Connection to backend established on port ${port}`));

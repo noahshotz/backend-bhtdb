@@ -45,7 +45,7 @@ app.get("/videogames", (req,res) =>  {
 })
 
 app.get("/q1", (req, res) => {
-    const q1 = "SELECT videogames.title AS game, COUNT(*) AS count FROM videogames, QUERYDATA WHERE QUERYDATA.QUERY LIKE '%' || videogames.title || '%' GROUP BY videogames.title LIMIT 10"
+    const q1 = "SELECT videogames.gId, videogames.title as game, COUNT(*) AS count from videogames, QUERYDATA WHERE QUERYDATA.QUERY LIKE CONCAT('% ', videogames.title, '%') GROUP BY videogames.title ORDER BY count DESC"
     db.query(q1, (err, data) => {
         if (err) return res.json(err)
         return res.json(data)

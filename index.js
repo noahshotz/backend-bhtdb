@@ -20,7 +20,7 @@ app.get("/", (req, res) => {
 
 // access to aol querydata table
 app.get("/querydata", (req, res) => {
-    const querydataq = "SELECT * FROM QUERYDATA LIMIT 5"
+    const querydataq = "SELECT * FROM QUERYDATA WHERE ITEMRANK IS NOT NULL AND CLICKURL IS NOT NULL LIMIT 5"
     db.query(querydataq, (err, data) => {
         if (err) return res.json(err)
         return res.json(data)

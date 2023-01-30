@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
 });
 
 // access to aol querydata table
-app.get("/querydata", (res, res) => {
+app.get("/querydata", (req, res) => {
     const querydataq = "SELECT * FROM QUERYDATA LIMIT 5"
     db.query(querydataq, (err, data) => {
         if (err) return res.json(err)

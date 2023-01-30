@@ -18,6 +18,15 @@ app.get("/", (req, res) => {
     );
 });
 
+// access to aol querydata table
+app.get("/querydata", (res, res) => {
+    const querydataq = "SELECT * FROM QUERYDATA LIMIT 5"
+    db.query(querydataq, (err, data) => {
+        if (err) return res.json(err)
+        return res.json(data)
+    })
+})
+
 // access to platform table
 app.get("/platform", (req, res) => {
     const platq = "SELECT * FROM platform";

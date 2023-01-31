@@ -56,7 +56,7 @@ app.get("/videogames", (req,res) =>  {
 
 // question 1
 app.get("/q1", (req, res) => {
-    const q1 = "SELECT videogames.gId, videogames.title as game, COUNT(*) AS count from videogames, QUERYDATA WHERE QUERYDATA.QUERY LIKE CONCAT('% ', videogames.title, '%') GROUP BY videogames.title ORDER BY count DESC LIMIT 10"
+    const q1 = "SELECT videogames.gId, videogames.title as game, COUNT(*) AS count from videogames, QUERYDATA WHERE QUERYDATA.QUERY LIKE CONCAT('%', videogames.title, '%') GROUP BY videogames.title ORDER BY count DESC LIMIT 10"
     db.query(q1, (err, data) => {
         if (err) return res.json(err)
         return res.json(data)
@@ -65,7 +65,7 @@ app.get("/q1", (req, res) => {
 
 // question 2
 app.get("/q2", (req, res) => {
-    const q2 = "SELECT videogames.genre, count(*) as count from QUERYDATA inner join videogames on QUERYDATA.QUERY LIKE concat('% ', REPLACE(videogames.title, 'The ', ''),' %') GROUP BY videogames.genre order by count desc"
+    const q2 = "SELECT videogames.genre, count(*) as count from QUERYDATA inner join videogames on QUERYDATA.QUERY LIKE concat('%', REPLACE(videogames.title, 'The ', ''),'%') GROUP BY videogames.genre order by count desc"
     db.query(q2, (err, data) => {
         if (err) return res.json(err)
         return res.json(data)
@@ -74,7 +74,7 @@ app.get("/q2", (req, res) => {
 
 // question 3
 app.get("/q3", (req, res) => {
-    const q3 = "SELECT videogames.max_players, count(*) as count from videogames, QUERYDATA WHERE QUERYDATA.QUERY LIKE CONCAT('%', videogames.title, ' %') OR QUERYDATA.QUERY LIKE videogames.title GROUP BY videogames.max_players ORDER BY count desc"
+    const q3 = "SELECT videogames.max_players, count(*) as count from videogames, QUERYDATA WHERE QUERYDATA.QUERY LIKE CONCAT('%', videogames.title, '%') GROUP BY videogames.max_players ORDER BY count desc"
     db.query(q3, (err, data) => {
         if (err) return res.json(err)
         return res.json(data)
@@ -85,7 +85,7 @@ app.get("/q3", (req, res) => {
 
 // question 5
 app.get("/q5", (req, res) => {
-    const q5 = "SELECT platform.pId, CONCAT(hersteller, ' ', name) as platform, COUNT(*) AS count from platform, QUERYDATA WHERE QUERYDATA.QUERY LIKE CONCAT('% ', platform.name, '%') GROUP BY name ORDER BY count DESC"
+    const q5 = "SELECT platform.pId, CONCAT(hersteller, ' ', name) as platform, COUNT(*) AS count from platform, QUERYDATA WHERE QUERYDATA.QUERY LIKE CONCAT('%', platform.name, '%') GROUP BY name ORDER BY count DESC"
     db.query(q5, (err, data) => {
         if (err) return res.json(err)
         return res.json(data)

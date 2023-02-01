@@ -100,7 +100,7 @@ app.get("/q5", (req, res) => {
 // Question 6
 // Welche Hersteller waren direkt am verbreitetsten in den Suchanfragen?
 app.get("/q6", (req, res) => {
-    const q6 = ""                       // add missing query
+    const q6 = "SELECT publisher.name, count(*) AS count FROM publisher, QUERYDATA WHERE QUERYDATA.QUERY LIKE CONCAT('%', publisher.name, '%') GROUP BY publisher.name ORDER BY count desc"
     db.query(q6, (err, data) => {
         if (err) return res.json(err)
         return res.json(data)

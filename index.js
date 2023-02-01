@@ -110,7 +110,7 @@ app.get("/q6", (req, res) => {
 // Question 7
 // Welche Hersteller waren indirekt am verbreitetsten in den Suchanfragen?
 app.get("/q7", (req, res) => {
-    const q7 = ""                       // add missing query
+    const q7 = "SELECT videogames.publisher, count(*) AS count FROM videogames, QUERYDATA WHERE QUERYDATA.QUERY LIKE concat('%', videogames.title, '%') GROUP BY videogames.publisher ORDER BY count DESC LIMIT 10"
     db.query(q7, (err, data) => {
         if (err) return res.json(err)
         return res.json(data)

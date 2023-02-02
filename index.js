@@ -86,11 +86,18 @@ app.get("/q3", (req, res) => {
 
 // Question 4
 // Waren online oder offline-Spiele beliebter?
+app.get("/q4", (req, res) => {
+    const q4 = ""               // add missing query
+    db.query(q5, (err, data) => {
+        if (err) return res.json(err)
+        return res.json(data)
+    })
+})
 
 // Question 5
 // Wie sah die Verteilung auf verschiedenen Plattformen aus?
 app.get("/q5", (req, res) => {
-    const q5 = "SELECT platform.pId, CONCAT(hersteller, ' ', name) as platform, COUNT(*) AS count from platform, QUERYDATA WHERE QUERYDATA.QUERY LIKE CONCAT('%', platform.name, '%') GROUP BY name ORDER BY count DESC"
+    const q5 = "SELECT platform.pId, CONCAT(hersteller, ' ', name) as platform, COUNT(*) AS count from platform, QUERYDATA WHERE QUERYDATA.QUERY LIKE CONCAT('%', platform.name, '%') GROUP BY name ORDER BY count DESC LIMIT 10"
     db.query(q5, (err, data) => {
         if (err) return res.json(err)
         return res.json(data)
@@ -147,4 +154,5 @@ app.get("/q10", (req, res) => {
     })
 })
 
+// Expose app to port
 app.listen(port, () => console.log(`Connection to backend established on port ${port}`));

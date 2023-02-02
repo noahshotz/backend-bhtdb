@@ -107,7 +107,7 @@ app.get("/q5", (req, res) => {
 // Question 6
 // Welche Hersteller waren direkt am verbreitetsten in den Suchanfragen?
 app.get("/q6", (req, res) => {
-    const q6 = "SELECT publisher.name, count(*) AS count FROM publisher, QUERYDATA WHERE QUERYDATA.QUERY LIKE CONCAT('%', publisher.name, '%') GROUP BY publisher.name ORDER BY count desc"
+    const q6 = "SELECT publisher.name, count(*) AS count FROM publisher, QUERYDATA WHERE QUERYDATA.QUERY LIKE CONCAT('%', publisher.name, '%') GROUP BY publisher.name ORDER BY count desc LIMIT 10"
     db.query(q6, (err, data) => {
         if (err) return res.json(err)
         return res.json(data)
@@ -137,7 +137,7 @@ app.get("/q8", (req, res) => {
 // Question 9
 // Welche Websites wurden dafür frequentiert?
 app.get("/q9", (req, res) => {
-    const q9 = "SELECT QUERYDATA.CLICKURL, count(*) as count FROM videogames, QUERYDATA WHERE QUERYDATA.QUERY LIKE CONCAT('%', videogames.title, '%') AND QUERYDATA.QUERY LIKE CONCAT('%', 'cheat', '%') GROUP BY QUERYDATA.CLICKURL ORDER BY count DESC LIMIT 10"
+    const q9 = "SELECT QUERYDATA.CLICKURL, count(*) as count FROM videogames, QUERYDATA WHERE QUERYDATA.QUERY LIKE CONCAT('%', videogames.title, '%') AND QUERYDATA.QUERY LIKE CONCAT('%', 'cheat', '%') AND QUERYDATA.CLICKURL IS NOT NULL GROUP BY QUERYDATA.CLICKURL ORDER BY count DESC LIMIT 10"
     db.query(q9, (err, data) => {
         if (err) return res.json(err)
         return res.json(data)

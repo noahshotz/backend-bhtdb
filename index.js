@@ -47,7 +47,7 @@ app.get("/publisher", (req, res) => {
 
 // Access to video games table
 app.get("/videogames", (req,res) =>  {
-    const videoq = "SELECT * from videogames LEFT JOIN platform on videogames.platform=platform.pId LIMIT 5";
+    const videoq = "SELECT * from videogames LIMIT 10";
     db.query(videoq, (err, data) => {
         if (err) return res.json(err);
         return res.json(data);

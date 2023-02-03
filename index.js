@@ -88,7 +88,7 @@ app.get("/q3", (req, res) => {
 // In welchem Land wurden die meisten der von uns untersuchten Spiele entwickelt?
 app.get("/q4", (req, res) => {
     const q4 = "select publisher.sitz, count(*) as count from videogames left join publisher on videogames.publisher = publisher.pubId group by publisher.sitz"
-    db.query(q5, (err, data) => {
+    db.query(q4, (err, data) => {
         if (err) return res.json(err)
         return res.json(data)
     })

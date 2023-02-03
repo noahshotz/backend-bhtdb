@@ -85,9 +85,9 @@ app.get("/q3", (req, res) => {
 })
 
 // Question 4
-// Waren online oder offline-Spiele beliebter?
+// In welchem Land wurden die meisten der von uns untersuchten Spiele entwickelt?
 app.get("/q4", (req, res) => {
-    const q4 = ""               // add missing query
+    const q4 = "select publisher.sitz, count(*) as count from videogames left join publisher on videogames.publisher = publisher.pubId group by publisher.sitz"
     db.query(q5, (err, data) => {
         if (err) return res.json(err)
         return res.json(data)

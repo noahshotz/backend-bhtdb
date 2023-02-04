@@ -145,9 +145,9 @@ app.get("/q9", (req, res) => {
 })
 
 // Question 10
-// Gibt es Häufungen in Suchen/Käufen von Spielen in bestimmten Staaten?
+// Was sind die am längsten bestehenden Entwickler der von uns untersuchten Spiele?
 app.get("/q10", (req, res) => {
-    const q10 = ""                       // add missing query
+    const q10 = "select publisher.name, publisher.gruendung from publisher where publisher.aktiv LIKE 1 ORDER BY publisher.gruendung ASC LIMIT 10"
     db.query(q10, (err, data) => {
         if (err) return res.json(err)
         return res.json(data)

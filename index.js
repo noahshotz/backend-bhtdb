@@ -5,10 +5,10 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 const db = mysql.createConnection({
-    host: "bhtdb.chxlf7lsw2kg.eu-central-1.rds.amazonaws.com",
-    database: "bhtdb",
-    user: "admin",
-    password: "#!$mybhtdb",
+    host: process.env.host,
+    database: process.env.database,
+    user: process.env.user,
+    password: process.env.password,
     port: 3306
 });
 
